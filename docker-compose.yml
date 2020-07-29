@@ -1,0 +1,49 @@
+version: '2.4'
+
+volumes:
+ hm-db_vol01:
+ hm-web_vol01:
+ hm-logs_vol01:
+
+services:
+
+ hm-db:
+    image: docker.adipsys.com:5000/hm-ha-db
+    restart: always
+    environment:
+      - DB_SERVICE_NAME=dbcluster
+      - BOOTSTRAP=no
+    volumes:
+          - 'hm-db_vol01:/var/lib/mysql/'
+ hm-web:
+      image: docker.adipsys.com:5000/hm-ha-web
+      hostname: wifi-node1
+      restart: always
+      environment:
+             # - DOCKERVERSION=3.20.3
+             - LICENCE_SERVER=licences-rec.adipsys.com
+             # - RSYSLOG_SERVER=
+             - UPDATE_SQL=no
+             - REMEDIATION=yes
+             - SYMFONY_VERSION=1.4.20
+      ports:
+              - 8080:80
+              - 8443:443
+      volumes:
+          - 'hm-web_vol01:/var/www/'
+          - 'hm-logs_vol01:/data/logs/'
+      depends_on:
+        - "hm-db"
+      links:
+        - "hm-db"
+
+ hm-radius:
+      image: docker.adipsys.com:5000/hm-ha-radius
+      restart: always
+      ports:
+              - 1812:1812/udp
+              - 1813:1813/udp
+      depends_on:
+        - "hm-db"
+      links:
+        - "hm-db"
