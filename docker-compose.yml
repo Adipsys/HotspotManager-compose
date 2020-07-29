@@ -12,6 +12,7 @@ services:
     restart: always
     environment:
       - DB_SERVICE_NAME=dbcluster
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - BOOTSTRAP=no
     volumes:
           - 'hm-db_vol01:/var/lib/mysql/'
@@ -20,6 +21,13 @@ services:
       hostname: wifi-node1
       restart: always
       environment:
+             - OPERATOR=${OPERATOR}
+             - HM_SERVER_NAME=${HM_SERVER_NAME}
+             - HM_URL_SUFFIX=${HM_URL_SUFFIX}
+             - HOTSPOT_ALIAS1=${HOTSPOT_ALIAS1}
+             - ADMIN_ALIAS1=${ADMIN_ALIAS1}
+             - MONITORING_ALIAS1=${MONITORING_ALIAS1}
+             - OPERATOR_SUPPORT_EMAIL=${OPERATOR_SUPPORT_EMAIL}
              # - DOCKERVERSION=3.20.3
              - LICENCE_SERVER=licences-rec.adipsys.com
              # - RSYSLOG_SERVER=
