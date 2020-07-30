@@ -21,6 +21,7 @@ services:
       hostname: wifi-node1
       restart: always
       environment:
+             - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
              - OPERATOR=${OPERATOR}
              - HM_SERVER_NAME=${HM_SERVER_NAME}
              - HM_URL_SUFFIX=${HM_URL_SUFFIX}
