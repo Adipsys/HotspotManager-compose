@@ -44,8 +44,7 @@ services:
         - "hm-db"
       links:
         - "hm-db"
-        - "hm-radius"
-
+        
  hm-radius:
       image: docker.adipsys.com:5000/hm-ha-radius
       restart: always
