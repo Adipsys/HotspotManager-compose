@@ -28,7 +28,7 @@ services:
              - HOTSPOT_ALIAS1=${HOTSPOT_ALIAS1}
              - ADMIN_ALIAS1=${ADMIN_ALIAS1}
              - OPERATOR_SUPPORT_EMAIL=${OPERATOR_SUPPORT_EMAIL}
-             # - DOCKERVERSION=3.20.3
+             - DOCKERVERSION=3.20.3
              - LICENCE_SERVER=licences-rec.adipsys.com
              # - RSYSLOG_SERVER=
              - UPDATE_SQL=no
