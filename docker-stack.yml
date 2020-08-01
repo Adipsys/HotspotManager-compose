@@ -1,0 +1,55 @@
+version: '3.8'
+
+volumes:
+ hm-db_vol01:
+ hm-web_vol01:
+ hm-logs_vol01:
+ ssl-certificates_vol01:
+
+services:
+
+ hm-db:
+    image: docker.adipsys.com:5000/hm-ha-db
+    restart: always
+    environment:
+      - DB_SERVICE_NAME=dbcluster
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - BOOTSTRAP=no
+    volumes:
+          - 'hm-db_vol01:/var/lib/mysql/'
+ hm-web:
+      image: docker.adipsys.com:5000/hm-ha-web
+      hostname: wifi-node1
+      restart: always
+      environment:
+             - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+             - OPERATOR=${OPERATOR}
+             - HM_SERVER_NAME=${HM_SERVER_NAME}
+             - HM_URL_SUFFIX=${HM_URL_SUFFIX}
+             - HOTSPOT_ALIAS1=${HOTSPOT_ALIAS1}
+             - ADMIN_ALIAS1=${ADMIN_ALIAS1}
+             - OPERATOR_SUPPORT_EMAIL=${OPERATOR_SUPPORT_EMAIL}
+             - DOCKERVERSION=3.20.3
+             - LICENCE_SERVER=licences-rec.adipsys.com
+             # - RSYSLOG_SERVER=
+             - UPDATE_SQL=no
+             - REMEDIATION=yes
+             - SYMFONY_VERSION=1.4.20
+      ports:
+              - 8080:80
+              - 8443:443
+      volumes:
+          - 'hm-web_vol01:/var/www/'
+          - 'hm-logs_vol01:/data/logs/'
+          - 'ssl-certificates_vol01:/root/hm_ssl_certificates/'
+      depends_on:
+        - "hm-db"
+        
+ hm-radius:
+      image: docker.adipsys.com:5000/hm-ha-radius
+      restart: always
+      ports:
+              - 1812:1812/udp
+              - 1813:1813/udp
+      depends_on:
+        - "hm-db"
