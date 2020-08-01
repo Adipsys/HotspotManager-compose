@@ -36,8 +36,7 @@ services:
              - REMEDIATION=yes
              - SYMFONY_VERSION=1.4.20
       ports:
-              - 8080:80
-              - 8443:443
+              - ${WEB_IHM_PORT}:443
       volumes:
           - 'hm-web_vol01:/var/www/'
           - 'hm-logs_vol01:/data/logs/'
@@ -49,7 +48,7 @@ services:
       image: docker.adipsys.com:5000/hm-ha-radius
       restart: always
       ports:
-              - 1812:1812/udp
-              - 1813:1813/udp
+              - ${RADIUS_AUTH_PORT}:1812/udp
+              - ${RADIUS_ACC_PORT}:1813/udp
       depends_on:
         - "hm-db"
