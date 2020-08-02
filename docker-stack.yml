@@ -40,6 +40,11 @@ services:
              - UPDATE_SQL=no
              - REMEDIATION=yes
              - SYMFONY_VERSION=1.4.20
+      deploy:
+      placement:
+             max_replicas_per_node: 1
+             constraints:
+                 - node.role == manager
       ports:
               - ${WEB_IHM_PORT}:443
       volumes:
@@ -52,6 +57,9 @@ services:
  hm-radius:
       image: docker.adipsys.com:5000/hm-ha-radius
       restart: always
+      deploy:
+      placement:
+             max_replicas_per_node: 1
       ports:
               - ${RADIUS_AUTH_PORT}:1812/udp
               - ${RADIUS_ACC_PORT}:1813/udp
