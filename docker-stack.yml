@@ -41,7 +41,7 @@ services:
              - REMEDIATION=yes
              - SYMFONY_VERSION=1.4.20
       deploy:
-      placement:
+         placement:
              #max_replicas_per_node: 1
              constraints:
                  - node.role == manager
@@ -57,8 +57,8 @@ services:
  hm-radius:
       image: docker.adipsys.com:5000/hm-ha-radius
       restart: always
-      deploy:
-      #placement:
+      #deploy:
+         #placement:
              #max_replicas_per_node: 1
       ports:
               - ${RADIUS_AUTH_PORT}:1812/udp
