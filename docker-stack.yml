@@ -9,7 +9,7 @@ volumes:
 services:
 
  hm-db:
-    image: docker.adipsys.com:5000/hm-ha-db
+    image: docker.adipsys.com:5000/hm-ha-db:3.20.3
     restart: always
     environment:
       - DB_SERVICE_NAME=dbcluster
@@ -23,7 +23,7 @@ services:
     volumes:
           - 'hm-db_vol01:/var/lib/mysql/'
  hm-web:
-      image: docker.adipsys.com:5000/hm-ha-web
+      image: docker.adipsys.com:5000/hm-ha-web:3.20.3
       hostname: wifi-node1
       restart: always
       environment:
@@ -35,9 +35,9 @@ services:
              - ADMIN_ALIAS1=${ADMIN_ALIAS1}
              - OPERATOR_SUPPORT_EMAIL=${OPERATOR_SUPPORT_EMAIL}
              - DOCKERVERSION=3.20.3
-             - LICENCE_SERVER=licences-rec.adipsys.com
+             - LICENCE_SERVER=licences.adipsys.com
              - RSYSLOG_SERVER=${RSYSLOG_SERVER}
-             - UPDATE_SQL=no
+             - UPDATE_SQL=yes
              - REMEDIATION=yes
              - SYMFONY_VERSION=1.4.20
       deploy:
@@ -57,7 +57,7 @@ services:
         - "hm-db"
         
  hm-radius:
-      image: docker.adipsys.com:5000/hm-ha-radius
+      image: docker.adipsys.com:5000/hm-ha-radius:3.20.3
       restart: always
       #deploy:
          #placement:
