@@ -37,7 +37,7 @@ services:
              - DOCKERVERSION=3.20.3
              - LICENCE_SERVER=licences.adipsys.com
              - RSYSLOG_SERVER=${RSYSLOG_SERVER}
-             - UPDATE_SQL=yes
+             - UPDATE_SQL=no
              - REMEDIATION=yes
              - SYMFONY_VERSION=1.4.20
       deploy:
