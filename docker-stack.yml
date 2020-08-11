@@ -51,7 +51,7 @@ services:
       volumes:
           - 'hm-web_vol01:/var/www/'
           - 'hm-logs_vol01:/data/logs/'
-          #- 'ssl-certificates_vol01:/root/hm_ssl_certificates/'
+         #- 'ssl-certificates_vol01:/root/hm_ssl_certificates/'
           - '/root/ssl_certificates/:/root/hm_ssl_certificates/'
       depends_on:
         - "hm-db"
