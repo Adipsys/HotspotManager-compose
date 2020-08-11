@@ -34,10 +34,10 @@ services:
              - HOTSPOT_ALIAS1=${HOTSPOT_ALIAS1}
              - ADMIN_ALIAS1=${ADMIN_ALIAS1}
              - OPERATOR_SUPPORT_EMAIL=${OPERATOR_SUPPORT_EMAIL}
-             - DOCKERVERSION=3.20.3
+             - DOCKERVERSION=3.20.3 #set to current version and change after update.
              - LICENCE_SERVER=licences.adipsys.com
              - RSYSLOG_SERVER=${RSYSLOG_SERVER}
-             - UPDATE_SQL=no
+             - UPDATE_SQL=no #set to "no" for installation.
              - REMEDIATION=yes
              - SYMFONY_VERSION=1.4.20
       deploy:
