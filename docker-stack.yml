@@ -36,7 +36,6 @@ services:
              - OPERATOR_SUPPORT_EMAIL=${OPERATOR_SUPPORT_EMAIL}
              - LICENCE_SERVER=licences.adipsys.com
              - RSYSLOG_SERVER=${RSYSLOG_SERVER}
-             - UPDATE_SQL=no #set to "no" for installation.
              - REMEDIATION=yes
              - SYMFONY_VERSION=1.4.20
       deploy:
