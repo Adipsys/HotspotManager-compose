@@ -34,7 +34,6 @@ services:
              - HOTSPOT_ALIAS1=${HOTSPOT_ALIAS1}
              - ADMIN_ALIAS1=${ADMIN_ALIAS1}
              - OPERATOR_SUPPORT_EMAIL=${OPERATOR_SUPPORT_EMAIL}
-             - DOCKERVERSION=3.21.0 #set to current version and change after update.
              - LICENCE_SERVER=licences.adipsys.com
              - RSYSLOG_SERVER=${RSYSLOG_SERVER}
              - UPDATE_SQL=no #set to "no" for installation.
