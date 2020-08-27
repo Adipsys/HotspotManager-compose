@@ -23,6 +23,22 @@ services:
                  - node.role == manager
     volumes:
           - 'hm-db_vol01:/var/lib/mysql/'
+
+# hm-dbX:
+#    image: docker.adipsys.com:5000/hm-ha-db
+#    restart: always
+#    command: node hm-db
+#    environment:
+#      - XTRABACKUP_PASSWORD=${MYSQL_ROOT_PASSWORD}
+#      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+#      - MYSQL_ROOT_HOST=%
+#    deploy:
+#      placement:
+#             #max_replicas_per_node: 1
+#             constraints:
+#                 - node.role != manager
+#    volumes:
+#          - 'hm-db_vol01:/var/lib/mysql/'
           
  hm-web:
       image: docker.adipsys.com:5000/hm-ha-web
