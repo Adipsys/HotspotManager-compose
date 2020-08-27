@@ -11,10 +11,11 @@ services:
  hm-db:
     image: docker.adipsys.com:5000/hm-ha-db
     restart: always
+    command: seed
     environment:
-      - DB_SERVICE_NAME=dbcluster
+      - XTRABACKUP_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - BOOTSTRAP=no
+      - MYSQL_ROOT_HOST=%
     deploy:
       placement:
              #max_replicas_per_node: 1
@@ -22,6 +23,7 @@ services:
                  - node.role == manager
     volumes:
           - 'hm-db_vol01:/var/lib/mysql/'
+          
  hm-web:
       image: docker.adipsys.com:5000/hm-ha-web
       hostname: wifi-node1
