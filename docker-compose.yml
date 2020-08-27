@@ -9,13 +9,14 @@ volumes:
 services:
 
  hm-db:
-    image: docker.adipsys.com:5000/hm-ha-db
-    restart: always
-    environment:
-      - DB_SERVICE_NAME=dbcluster
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - BOOTSTRAP=no
-    volumes:
+     image: docker.adipsys.com:5000/hm-ha-db
+     restart: always
+     command: seed
+     environment:
+       - XTRABACKUP_PASSWORD=${MYSQL_ROOT_PASSWORD}
+       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+       - MYSQL_ROOT_HOST=%
+     volumes:
           - 'hm-db_vol01:/var/lib/mysql/'
  hm-web:
       image: docker.adipsys.com:5000/hm-ha-web
