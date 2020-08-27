@@ -11,7 +11,8 @@ services:
  hm-db:
     image: docker.adipsys.com:5000/hm-ha-db
     restart: always
-    command: seed
+    command: seed    
+#   command: node hm-dbX
     environment:
       - XTRABACKUP_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
