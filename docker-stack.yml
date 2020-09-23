@@ -70,6 +70,7 @@ services:
           - 'hm-logs_vol01:/data/logs/'
          #- 'ssl-certificates_vol01:/root/hm_ssl_certificates/'
           - '/root/ssl_certificates/:/root/hm_ssl_certificates/'
+         #- '/backups/:/backups/'
       depends_on:
         - "hm-db"
         
