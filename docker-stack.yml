@@ -9,7 +9,7 @@ volumes:
 services:
 
  hm-db:
-    image: docker.adipsys.com:5000/hm-ha-db:${PRODUCT_VERSION}
+    image: docker.adipsys.com:5000/hm-ha-db
     restart: always
     command: seed    
 #   command: node hm-dbX
@@ -26,7 +26,7 @@ services:
           - 'hm-db_vol01:/var/lib/mysql/'
 
 # hm-dbX:
-#    image: docker.adipsys.com:5000/hm-ha-db:${PRODUCT_VERSION}
+#    image: docker.adipsys.com:5000/hm-ha-db
 #    restart: always
 #    command: node hm-db
 #    environment:
