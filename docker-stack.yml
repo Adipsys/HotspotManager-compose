@@ -78,6 +78,7 @@ services:
  hm-radius:
       image: docker.adipsys.com:5000/hm-ha-radius:${PRODUCT_VERSION}
       restart: always
+      #command: freeradius -fxxx
       #deploy:
          #placement:
              #max_replicas_per_node: 1
