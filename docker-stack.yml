@@ -28,7 +28,7 @@ services:
  hm-db:
     image: docker.adipsys.com:5000/hm-ha-db
     restart: always
-    command: node hm-db-seed hm-db
+    command: node hm-db-seed
     environment:
       - XTRABACKUP_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
@@ -85,5 +85,13 @@ services:
       ports:
               - ${RADIUS_AUTH_PORT}:1812/udp
               - ${RADIUS_ACC_PORT}:1813/udp
+              #- target: ${RADIUS_AUTH_PORT}
+              #  published: 1812
+              #  protocol: udp
+              #  mode: host
+              #- target: ${RADIUS_ACC_PORT}
+              #  published: 1813
+              #  protocol: udp
+              #  mode: host
       depends_on:
         - "hm-db"
