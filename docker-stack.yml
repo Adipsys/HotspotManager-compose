@@ -1,6 +1,7 @@
 version: '3.7'
 
 volumes:
+ hm-db-seed_vol01:
  hm-db_vol01:
  hm-web_vol01:
  hm-logs_vol01:
@@ -8,11 +9,10 @@ volumes:
 
 services:
 
- hm-db:
+ hm-db-seed:
     image: docker.adipsys.com:5000/hm-ha-db
     restart: always
-    command: seed    
-#   command: node hm-dbX
+    command: seed
     environment:
       - XTRABACKUP_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
@@ -23,23 +23,23 @@ services:
              constraints:
                  - node.role == manager
     volumes:
+          - 'hm-db-seed_vol01:/var/lib/mysql/'
+          
+ hm-db:
+    image: docker.adipsys.com:5000/hm-ha-db
+    restart: always
+    command: node hm-db-seed
+    environment:
+      - XTRABACKUP_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_ROOT_HOST=%
+    #deploy:
+    #  placement:
+             #max_replicas_per_node: 1
+             #constraints:
+             #    - node.role == manager
+    volumes:
           - 'hm-db_vol01:/var/lib/mysql/'
-
-# hm-dbX:
-#    image: docker.adipsys.com:5000/hm-ha-db
-#    restart: always
-#    command: node hm-db
-#    environment:
-#      - XTRABACKUP_PASSWORD=${MYSQL_ROOT_PASSWORD}
-#      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-#      - MYSQL_ROOT_HOST=%
-#    deploy:
-#      placement:
-#             #max_replicas_per_node: 1
-#             constraints:
-#                 - node.role != manager
-#    volumes:
-#          - 'hm-db_vol01:/var/lib/mysql/'
           
  hm-web:
       image: docker.adipsys.com:5000/hm-ha-web:${PRODUCT_VERSION}
