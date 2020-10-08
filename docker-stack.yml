@@ -11,14 +11,15 @@ services:
  hm-db:
     image: docker.adipsys.com:5000/hm-ha-db
     restart: always
-    command: no-galera
+    command : seed
+    # command: no-galera
     # command: node hm-db
     environment:
       - XTRABACKUP_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_ROOT_HOST=%
       - NODE_ADDRESS=^10.0.*.*
-      - FAKE_HEALTHCHECK=8081
+      #- FAKE_HEALTHCHECK=8081
     deploy:
       placement:
              #max_replicas_per_node: 1
