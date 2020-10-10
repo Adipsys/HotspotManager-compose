@@ -101,8 +101,8 @@ services:
       depends_on:
         - "hm-db"
         
- hm-radius:
-      image: docker.adipsys.com:5000/hm-ha-radius:${PRODUCT_VERSION}
+ hm-radius-v3:
+      image: docker.adipsys.com:5000/hm-ha-radius-v3:${PRODUCT_VERSION}
       restart: always
       environment:
              - DEBUG=0
