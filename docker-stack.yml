@@ -78,7 +78,7 @@ services:
              - HOTSPOT_ALIAS1=${HOTSPOT_ALIAS1}
              - ADMIN_ALIAS1=${ADMIN_ALIAS1}
              - OPERATOR_SUPPORT_EMAIL=${OPERATOR_SUPPORT_EMAIL}
-             - LICENCE_SERVER=licences.adipsys.com
+             - LICENCE_SERVER=${LICENCE_SERVER}
              - RSYSLOG_SERVER=${RSYSLOG_SERVER}
              - REMEDIATION=yes
              - SYMFONY_VERSION=1.5.11
