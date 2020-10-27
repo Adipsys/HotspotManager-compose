@@ -106,7 +106,7 @@ services:
       restart: always
       environment:
              - DEBUG=0
-      #command: freeradius -fxxx
+      #command: "freeradius -XXX"
       #deploy:
          #placement:
              #max_replicas_per_node: 1
