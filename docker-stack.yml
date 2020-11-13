@@ -6,6 +6,12 @@ volumes:
  hm-logs_vol01:
  #ssl-certificates_vol01:
 
+#networks:
+#  traefik:
+#   name: traefik
+#   external: true
+#  local_stack:
+
 services:
 
  hm-db:
@@ -25,6 +31,9 @@ services:
              #max_replicas_per_node: 1
              constraints:
                  - node.role == manager
+    #networks:
+      #       - local_stack
+      
     volumes:
           - 'hm-db_vol01:/var/lib/mysql/'
 
@@ -88,6 +97,21 @@ services:
              #max_replicas_per_node: 1
              constraints:
                  - node.role == manager
+      #   labels:
+      #       - "traefik.enable=true"
+      #       - "traefik.http.routers.${OPERATOR}-http.rule=Host(`${OPERATOR}.${HM_URL_SUFFIX}`)"
+      #       - "traefik.http.routers.${OPERATOR}-http.entrypoints=web"
+      #       - "traefik.http.routers.${OPERATOR}-https.rule=Host(`${OPERATOR}.${HM_URL_SUFFIX}`)"
+      #       - "traefik.http.routers.${OPERATOR}-https.entrypoints=websecure"
+      #       - "traefik.http.services.${OPERATOR}-http.loadbalancer.server.port=80"
+      #       - "traefik.http.services.${OPERATOR}-http.loadbalancer.server.scheme=http"
+      #       - "traefik.http.services.${OPERATOR}-http.loadbalancer.server.port=443"
+      #       - "traefik.http.services.${OPERATOR}-http.loadbalancer.server.scheme=https"
+      #       - "traefik.http.routers.${OPERATOR}-https.tls=true"
+      #       - "traefik.docker.network=traefik"
+      #networks:
+      #       - traefik
+      #       - local_stack
       ports:
               - ${WEB_IHM_PORT}:80
               - ${WEB_IHM_SSL_PORT}:443
@@ -110,6 +134,9 @@ services:
       #deploy:
          #placement:
              #max_replicas_per_node: 1
+      #networks:
+      #       - traefik
+      #       - local_stack
       ports:
               - ${RADIUS_AUTH_PORT}:1812/udp
               - ${RADIUS_ACC_PORT}:1813/udp
