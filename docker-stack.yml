@@ -105,8 +105,8 @@ services:
       #       - "traefik.http.routers.${OPERATOR}-https.entrypoints=websecure"
       #       - "traefik.http.services.${OPERATOR}-http.loadbalancer.server.port=80"
       #       - "traefik.http.services.${OPERATOR}-http.loadbalancer.server.scheme=http"
-      #       - "traefik.http.services.${OPERATOR}-http.loadbalancer.server.port=443"
-      #       - "traefik.http.services.${OPERATOR}-http.loadbalancer.server.scheme=https"
+      ##       - "traefik.http.services.${OPERATOR}-http.loadbalancer.server.port=443"
+      ##       - "traefik.http.services.${OPERATOR}-http.loadbalancer.server.scheme=https"
       #       - "traefik.http.routers.${OPERATOR}-https.tls=true"
       #       - "traefik.docker.network=traefik"
       #networks:
