@@ -17,6 +17,7 @@ services:
     restart: always
     command : seed
     environment:
+      - TZ=${TZ}
       - XTRABACKUP_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_ROOT_HOST=%
@@ -37,6 +38,7 @@ services:
       hostname: wifi-node1
       restart: always
       environment:
+             - TZ=${TZ}
              - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
              - OPERATOR=${OPERATOR}
              - HM_SERVER_NAME=${HM_SERVER_NAME}
@@ -85,6 +87,7 @@ services:
       image: docker.adipsys.com:5000/hm-ha-radius-v3:${PRODUCT_VERSION}
       restart: always
       environment:
+             - TZ=${TZ}
              - DEBUG=0
       #command: "freeradius -XXX"
       #deploy:
