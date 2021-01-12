@@ -2,7 +2,7 @@ version: '3.7'
 
 volumes:
  hm-db_vol01:
- hm-web_vol01:
+ hm-data_vol01:
  hm-logs_vol01:
  #ssl-certificates_vol01:
 
@@ -122,7 +122,7 @@ services:
               - ${WEB_IHM_SSL_PORT}:443
               - ${LOGHOST_PORT}:514/udp
       volumes:
-          - 'hm-web_vol01:/var/www/hotspotmanager/prod/web/'
+          - 'hm-data_vol01:/user_data/'
           - 'hm-logs_vol01:/data/logs/'
          #- 'ssl-certificates_vol01:/root/hm_ssl_certificates/'
           - '/root/ssl_certificates/:/root/hm_ssl_certificates/'
