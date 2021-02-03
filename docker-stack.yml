@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.8'
 
 volumes:
  hm-db_vol01:
@@ -13,7 +13,7 @@ volumes:
 #  local_stack:
 
 services:
-
+# Rename to hm-db-seed when bootstraping a cluster.
  hm-db:
     image: docker.adipsys.com:5000/hm-ha-db
     restart: always
@@ -28,8 +28,9 @@ services:
       - NODE_ADDRESS=^10.0.*.*
       #- FAKE_HEALTHCHECK=8081
     deploy:
+    replicas: 1
       placement:
-             #max_replicas_per_node: 1
+             max_replicas_per_node: 1
              constraints:
                  - node.role == manager
     #networks:
@@ -38,41 +39,26 @@ services:
     volumes:
           - 'hm-db_vol01:/var/lib/mysql/'
 
-# hm-db-seed:
-#    image: docker.adipsys.com:5000/hm-ha-db
-#    restart: always
-#    command: seed
-#    # command: node hm-db
-#    environment:
-#      - XTRABACKUP_PASSWORD=${MYSQL_ROOT_PASSWORD}
-#      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-#      - MYSQL_ROOT_HOST=%
-#      - NODE_ADDRESS=^10.0.*.*
-#    deploy:
-#      placement:
-#             #max_replicas_per_node: 1
-#             constraints:
-#                 - node.role == manager
-#    volumes:
-#          - 'hm-db-vol01:/var/lib/mysql/'
- 
 # hm-db:
 #    image: docker.adipsys.com:5000/hm-ha-db
 #    restart: always
-#    command: node hm-db-seed,hm-db
+#    command : tasks.hm-db-seed,tasks.hm-db
 #    environment:
+#      - TZ=${TZ}
 #      - XTRABACKUP_PASSWORD=${MYSQL_ROOT_PASSWORD}
 #      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
 #      - MYSQL_ROOT_HOST=%
 #      - NODE_ADDRESS=^10.0.*.*
-#      - HEALTHY_WHILE_BOOTING=1
-#
+#      #- FAKE_HEALTHCHECK=8081
 #    deploy:
-#       replicas: 0
-#    #  placement:
-#             #max_replicas_per_node: 1
-#             #constraints:
-#             #    - node.role == manager
+#    replicas: 0
+#      placement:
+#             max_replicas_per_node: 1
+#             constraints:
+#                 - node.role == manager
+#    #networks:
+#      #       - local_stack
+#
 #    volumes:
 #          - 'hm-db_vol01:/var/lib/mysql/'
           
