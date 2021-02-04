@@ -28,7 +28,7 @@ services:
       - NODE_ADDRESS=^10.0.*.*
       #- FAKE_HEALTHCHECK=8081
     deploy:
-    replicas: 1
+      replicas: 1
       placement:
              max_replicas_per_node: 1
              constraints:
@@ -51,7 +51,7 @@ services:
 #      - NODE_ADDRESS=^10.0.*.*
 #      #- FAKE_HEALTHCHECK=8081
 #    deploy:
-#    replicas: 0
+#      replicas: 0
 #      placement:
 #             max_replicas_per_node: 1
 #             constraints:
@@ -79,7 +79,6 @@ services:
              - RSYSLOG_SERVER=${RSYSLOG_SERVER}
              - REMEDIATION=yes
              - SYMFONY_VERSION=1.5.11
-             #- LEGACY_MODE=1
       deploy:
          placement:
              #max_replicas_per_node: 1
