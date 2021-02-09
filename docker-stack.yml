@@ -34,8 +34,7 @@ services:
              max_replicas_per_node: 1
              constraints:
                  - node.role == manager
-    #networks:
-      #       - local_stack
+    
       
     volumes:
           - 'hm-db_vol01:/var/lib/mysql/'
