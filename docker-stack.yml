@@ -179,7 +179,6 @@ services:
       environment:
              - TZ=${TZ}
              - DEBUG=0
-      #      - REPLICA=1
       #command: "freeradius -XXX"
       deploy:
          placement:
