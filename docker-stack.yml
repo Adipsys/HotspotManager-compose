@@ -156,8 +156,10 @@ services:
          #    - "traefik.http.routers.${HM_SERVER_NAME}-replica-https.tls.certresolver=letsEncrypt"
              - "traefik.docker.network=traefik"
       #networks:
-      #       - traefik
-      #       - local_stack
+      #       traefik:
+      #       local_stack:
+      #              aliases:
+      #                - hm-web
       #ports:
               #- ${WEB_IHM_PORT}:80
               #- ${WEB_IHM_SSL_PORT}:443
