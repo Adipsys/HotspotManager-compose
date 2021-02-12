@@ -142,18 +142,18 @@ services:
                  #- node.hostname != CLOUD01-01
          labels:
              - "traefik.enable=true"
-             - "traefik.http.routers.${HM_SERVER_NAME}-http.rule=Host(`${HM_SERVER_NAME}.${HM_URL_SUFFIX}`) || Host(`${HM_SERVER_NAME}-api.${HM_URL_SUFFIX}`)"
-             - "traefik.http.routers.${HM_SERVER_NAME}-http.entrypoints=web"
+             - "traefik.http.routers.${HM_SERVER_NAME}-replica-http.rule=Host(`${HM_SERVER_NAME}.${HM_URL_SUFFIX}`) || Host(`${HM_SERVER_NAME}-api.${HM_URL_SUFFIX}`)"
+             - "traefik.http.routers.${HM_SERVER_NAME}-replica-http.entrypoints=web"
              
-             - "traefik.http.routers.${HM_SERVER_NAME}-https.rule=Host(`${HM_SERVER_NAME}.${HM_URL_SUFFIX}`) || Host(`${HM_SERVER_NAME}-api.${HM_URL_SUFFIX}`)"
-             - "traefik.http.routers.${HM_SERVER_NAME}-https.entrypoints=websecure"
+             - "traefik.http.routers.${HM_SERVER_NAME}-replica-https.rule=Host(`${HM_SERVER_NAME}.${HM_URL_SUFFIX}`) || Host(`${HM_SERVER_NAME}-api.${HM_URL_SUFFIX}`)"
+             - "traefik.http.routers.${HM_SERVER_NAME}-replica-https.entrypoints=websecure"
              
-             - "traefik.http.services.${HM_SERVER_NAME}-http.loadbalancer.server.port=80"
-             - "traefik.http.services.${HM_SERVER_NAME}-http.loadbalancer.server.scheme=http"
-         #    - "traefik.http.services.${HM_SERVER_NAME}-http.loadbalancer.server.port=443"
-         #    - "traefik.http.services.${HM_SERVER_NAME}-http.loadbalancer.server.scheme=https"
-             - "traefik.http.routers.${HM_SERVER_NAME}-https.tls=true"
-         #    - "traefik.http.routers.${HM_SERVER_NAME}-https.tls.certresolver=letsEncrypt"
+             - "traefik.http.services.${HM_SERVER_NAME}-replica-http.loadbalancer.server.port=80"
+             - "traefik.http.services.${HM_SERVER_NAME}-replica-http.loadbalancer.server.scheme=http"
+         #    - "traefik.http.services.${HM_SERVER_NAME}-replica-http.loadbalancer.server.port=443"
+         #    - "traefik.http.services.${HM_SERVER_NAME}-replica-http.loadbalancer.server.scheme=https"
+             - "traefik.http.routers.${HM_SERVER_NAME}-replica-https.tls=true"
+         #    - "traefik.http.routers.${HM_SERVER_NAME}-replica-https.tls.certresolver=letsEncrypt"
              - "traefik.docker.network=traefik"
       #networks:
       #       - traefik
