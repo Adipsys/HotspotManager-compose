@@ -17,7 +17,6 @@ services:
 # Rename to hm-db-seed when bootstraping a cluster.
  hm-db:
     image: docker.adipsys.com:5000/hm-ha-db
-    restart: always
     command : seed
     # command: no-galera
     # command: node hm-db
@@ -41,8 +40,7 @@ services:
 
 # hm-db:
 #    image: docker.adipsys.com:5000/hm-ha-db
-#    restart: always
-#    command : tasks.hm-db-seed,tasks.hm-db
+#    command : node tasks.hm-db-seed,tasks.hm-db
 #    environment:
 #      - TZ=${TZ}
 #      - XTRABACKUP_PASSWORD=${MYSQL_ROOT_PASSWORD}
@@ -51,6 +49,11 @@ services:
 #      - NODE_ADDRESS=^10.0.*.*
 #      #- FAKE_HEALTHCHECK=8081
 #    deploy:
+#       restart_policy:
+#           condition: none
+#           delay: 5s
+#           max_attempts: 3
+#           window: 120s
 #      replicas: 0
 #      placement:
 #             max_replicas_per_node: 1
@@ -65,7 +68,6 @@ services:
  hm-web:
       image: docker.adipsys.com:5000/hm-ha-web:${PRODUCT_VERSION}
       hostname: wifi-node1
-      restart: always
       environment:
              - TZ=${TZ}
              - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
@@ -85,7 +87,7 @@ services:
              constraints:
                  - node.role == manager
          labels:
-             - "traefik.enable=true"
+             - "traefik.enable=false"
              - "traefik.http.routers.${HM_SERVER_NAME}-admin-http.rule=Host(`${HM_SERVER_NAME}-admin.${HM_URL_SUFFIX}`)"
              - "traefik.http.routers.${HM_SERVER_NAME}-admin-http.entrypoints=web"
              
@@ -126,7 +128,6 @@ services:
  hm-web-replica:
       image: docker.adipsys.com:5000/hm-ha-web:${PRODUCT_VERSION}
       hostname: wifi-nodeX
-      restart: always
       environment:
              - TZ=${TZ}
              - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
@@ -184,7 +185,6 @@ services:
         
  hm-radius-v3:
       image: docker.adipsys.com:5000/hm-ha-radius-v3:${PRODUCT_VERSION}
-      restart: always
       environment:
              - TZ=${TZ}
              - DEBUG=0
