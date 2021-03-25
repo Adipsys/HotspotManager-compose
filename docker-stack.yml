@@ -110,7 +110,9 @@ services:
              - "traefik.http.services.${HM_SERVER_NAME}.loadbalancer.sticky.cookie.name=traefik"
 
              - "traefik.docker.network=traefik"
-      
+  #   networks:
+  #         - traefik
+  #         - local_stack
       ports:
               - ${WEB_IHM_PORT}:80
               - ${WEB_IHM_SSL_PORT}:443
