@@ -192,7 +192,6 @@ services:
          placement:
              max_replicas_per_node: 1
       #networks:
-      #       - traefik
       #       - local_stack
       ports:
               - ${RADIUS_AUTH_PORT}:1812/udp
