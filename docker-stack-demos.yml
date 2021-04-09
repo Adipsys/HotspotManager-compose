@@ -6,8 +6,8 @@ volumes:
  hm-logs_vol01:
 
 networks:
-  traefik:
-   name: traefik
+  Traefik_default:
+   name: Traefik_default
    external: true
   local_stack:
 
@@ -70,9 +70,9 @@ services:
          #    - "traefik.http.services.${HM_SERVER_NAME}-http.loadbalancer.server.scheme=https"
              - "traefik.http.routers.${HM_SERVER_NAME}-https.tls=true"
              - "traefik.http.routers.${HM_SERVER_NAME}-https.tls.certresolver=letsEncrypt"
-             - "traefik.docker.network=traefik"
+             - "traefik.docker.network=Traefik_default"
       networks:
-             - traefik
+             - Traefik_default
              - local_stack
       ports:
               - ${LOGHOST_PORT}:514/udp
@@ -94,7 +94,7 @@ services:
          #placement:
              #max_replicas_per_node: 1
       networks:
-             - traefik
+             - Traefik_default
              - local_stack
       ports:
               - ${RADIUS_AUTH_PORT}:1812/udp
