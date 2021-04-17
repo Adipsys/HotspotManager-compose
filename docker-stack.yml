@@ -83,7 +83,7 @@ services:
              - SYMFONY_VERSION=1.5.11
       deploy:
          placement:
-             #max_replicas_per_node: 1
+             max_replicas_per_node: 1
              constraints:
                  - node.role == manager
          labels:
