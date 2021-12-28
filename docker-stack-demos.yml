@@ -83,6 +83,14 @@ services:
       depends_on:
         - "hm-db"
         
+ hm-memcached:
+      image: memcached:latest
+      command: "memcached -p 11212"
+      networks:
+             - local_stack
+      depends_on:
+        - "hm-web"
+        
  hm-radius-v3:
       image: docker.adipsys.com:5000/hm-ha-radius-v3:${PRODUCT_VERSION}
       restart: always
