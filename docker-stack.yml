@@ -206,7 +206,7 @@ services:
              - TZ=${TZ}
              - DEBUG=0
       #command: "freeradius -XXX"
-      command: ""
+      command: "${RADIUS_COMMAND}"
       deploy:
          placement:
              max_replicas_per_node: 1
