@@ -189,7 +189,7 @@ services:
         - "hm-web"
         
  hm-memcached:
-      image: memcached:latest
+      image: memcached:1.4.39
       command: "memcached -p 11212"
       deploy:
          placement:
